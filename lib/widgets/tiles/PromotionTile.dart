@@ -27,7 +27,7 @@ class PromotionTile extends StatelessWidget {
 
   Widget _buildImage() =>
       ClipRRect(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(20),
         child: CachedNetworkImage(
           imageUrl: promotion.imageUrl,
           fit: BoxFit.cover,

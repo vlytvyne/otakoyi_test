@@ -31,7 +31,7 @@ class _PromotionsCarouselState extends State<PromotionsCarousel> {
   @override
   Widget build(BuildContext context) =>
       SizedBox(
-        height: 350,
+        height: 360,
         child: Stack(
           children: [
             _buildSlider(),
@@ -80,7 +80,7 @@ class _PromotionsCarouselState extends State<PromotionsCarousel> {
   
   Widget _buildNextButton() =>
       Positioned(
-        bottom: 0,
+        bottom: 10,
         right: 40,
         child: RoundShadowedButton(
           size: 60,

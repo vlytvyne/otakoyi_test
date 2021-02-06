@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) =>
       Scaffold(
         extendBody: true,
-        backgroundColor: AppColors.WHITE_BACKGROUND,
+        backgroundColor: AppColors.BACKGROUND,
         bottomNavigationBar: _buildBottomBar(),
         body: _fragments[_currentFragmentIndex],
       );
