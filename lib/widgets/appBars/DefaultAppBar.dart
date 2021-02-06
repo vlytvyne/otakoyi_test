@@ -8,7 +8,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   const DefaultAppBar({
     Key key,
-    this.actionButtons
+    @required this.actionButtons
   }) : super(key: key);
   
   @override

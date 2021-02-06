@@ -14,8 +14,7 @@ class RasterSvgImage extends StatelessWidget {
     this.fit: BoxFit.none,
     this.width = double.infinity,
     this.height = double.infinity,
-  })
-      : super(key: key);
+  }) : super(key: key);
   
   bool get isSvg => imageFullPath?.split('.')?.last == 'svg';
 
