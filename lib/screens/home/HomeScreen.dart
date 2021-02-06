@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:otakoyi_test/data/other/AssetProvider.dart';
+import 'package:otakoyi_test/screens/home/fragments/catalog_fragment/CatalogFragment.dart';
 import 'package:otakoyi_test/screens/home/fragments/home_fragment/HomeFragment.dart';
+import 'package:otakoyi_test/screens/home/fragments/men_fragment/MenFragment.dart';
 import 'package:otakoyi_test/screens/home/fragments/more_fragment/MoreFragment.dart';
-import 'package:otakoyi_test/widgets/appBars/DefaultAppBar.dart';
+import 'package:otakoyi_test/screens/home/fragments/women_fragment/WomenFragment.dart';
 import 'package:otakoyi_test/widgets/bottomBars/DefaultBottomBar.dart';
-import 'package:otakoyi_test/widgets/buttons/AppBarButton.dart';
 
 class HomeScreen extends StatefulWidget {
-  
-  final _fragments = <Widget>[
-    HomeFragment(),
-    MoreFragment(),
-  ];
   
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -19,15 +15,22 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   
+  final _fragments = <Widget>[
+    HomeFragment(),
+    WomenFragment(),
+    MenFragment(),
+    CatalogFragment(),
+    MoreFragment(),
+  ];
+  
   int _currentFragmentIndex = 0;
   
   @override
   Widget build(BuildContext context) =>
       Scaffold(
         extendBody: true,
-        appBar: _buildAppBar(),
         bottomNavigationBar: _buildBottomBar(),
-        body: widget._fragments[_currentFragmentIndex],
+        body: _fragments[_currentFragmentIndex],
       );
 
   DefaultBottomBar _buildBottomBar() =>
@@ -38,30 +41,29 @@ class _HomeScreenState extends State<HomeScreen> {
             'Home',
           ),
           BottomBarItem(
+            AssetProvider.getIcon('women_outlined.svg'),
+            'Women',
+          ),
+          BottomBarItem(
+            AssetProvider.getIcon('men_outlined.svg'),
+            'Men',
+          ),
+          BottomBarItem(
+            AssetProvider.getIcon('catalog_outlined.svg'),
+            'Catalog',
+          ),
+          BottomBarItem(
             AssetProvider.getIcon('more_filled.svg'),
             'More',
-          )
+          ),
         ],
         selectedItemIndex: _currentFragmentIndex,
-        onItemClick: (index) {
-          setState(() {
-            _currentFragmentIndex = index;
-          });
-        }
+        onItemClick: _onBottomBarItemClick,
       );
-
-  DefaultAppBar _buildAppBar() =>
-      DefaultAppBar(
-        actionButtons: [
-          AppBarButton(
-            AssetProvider.getIcon('search_outlined.png')
-          ),
-          AppBarButton(
-            AssetProvider.getIcon('like_outlined.png')
-          ),
-          AppBarButton(
-            AssetProvider.getIcon('cart_outlined.png')
-          ),
-        ],
-      );
+  
+  void _onBottomBarItemClick(int index) {
+    setState(() {
+      _currentFragmentIndex = index;
+    });
+  }
 }

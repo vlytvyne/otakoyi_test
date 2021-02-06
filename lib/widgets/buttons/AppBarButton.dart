@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:otakoyi_test/widgets/other/RasterSvgImage.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class AppBarButton extends StatelessWidget {
   
@@ -17,9 +17,7 @@ class AppBarButton extends StatelessWidget {
       InkResponse(
         radius: 24,
         onTap: () => onClick?.call(),
-        /// I would rather go with SVG here but when icon is exported from the Figma in SVG
-        /// the resulting SVG is different from what we have on the design (ugly).
-        child: RasterSvgImage(
+        child: SvgPicture.asset(
           fullIconPath,
           width: 28,
           height: 28,
