@@ -50,22 +50,34 @@ class CategoryGridTile extends StatelessWidget {
       );
   
   Widget _buildName() =>
-      Text(
-        category.name,
-        style: const TextStyle(
-          fontSize: 12,
-          fontWeight: FontWeight.w900,
-          color: AppColors.BLACK,
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Text(
+          category.name,
+          textAlign: TextAlign.center,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: const TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w900,
+            color: AppColors.BLACK,
+          ),
         ),
       );
   
   Widget _buildProductsCount() =>
-      Text(
-        "${category.productsCount} Products",
-        style: const TextStyle(
-          fontSize: 12,
-          fontWeight: FontWeight.w500,
-          color: AppColors.DARK_GREY,
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Text(
+          "${category.productsCount} Products",
+          textAlign: TextAlign.center,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: const TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w500,
+            color: AppColors.DARK_GREY,
+          ),
         ),
       );
   

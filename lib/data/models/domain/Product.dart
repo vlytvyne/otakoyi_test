@@ -1,10 +1,8 @@
-class Product {
+abstract class Product {
   
-  final String name;
-  final String imageUrl;
-  final String size;
-  final String price;
-
-  Product(this.name, this.imageUrl, this.size, this.price);
+  String get name;
+  String get imageUrl;
+  String get size;
+  String get price;
   
 }
