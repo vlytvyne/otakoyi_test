@@ -5,6 +5,7 @@ import 'package:otakoyi_test/screens/home/fragments/home_fragment/HomeFragment.d
 import 'package:otakoyi_test/screens/home/fragments/men_fragment/MenFragment.dart';
 import 'package:otakoyi_test/screens/home/fragments/more_fragment/MoreFragment.dart';
 import 'package:otakoyi_test/screens/home/fragments/women_fragment/WomenFragment.dart';
+import 'package:otakoyi_test/utils/AppColors.dart';
 import 'package:otakoyi_test/widgets/bottomBars/DefaultBottomBar.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -29,6 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) =>
       Scaffold(
         extendBody: true,
+        backgroundColor: AppColors.BACKGROUND,
         bottomNavigationBar: _buildBottomBar(),
         body: _fragments[_currentFragmentIndex],
       );
