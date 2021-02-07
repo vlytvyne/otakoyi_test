@@ -38,13 +38,13 @@ class _HomeFragmentState extends State<HomeFragment> {
         child: DefaultAppBar(
           actionButtons: [
             AppBarButton(
-                AssetProvider.getIcon('search_outlined.svg')
+              AssetProvider.getIcon('search_outlined.svg')
             ),
             AppBarButton(
-                AssetProvider.getIcon('like_outlined.svg')
+              AssetProvider.getIcon('like_outlined.svg')
             ),
             AppBarButton(
-                AssetProvider.getIcon('cart_outlined.svg')
+              AssetProvider.getIcon('cart_outlined.svg')
             ),
           ],
         ),
@@ -79,49 +79,47 @@ class _HomeFragmentState extends State<HomeFragment> {
         ),
       );
 
-  SafeArea _buildContent() {
-    return SafeArea(
-        child: SingleChildScrollView(
-          controller: _scrollController,
-          child: Column(
-            children: [
-              const VerticalMargin(20),
-              PromotionsCarousel(_bloc.promotionsObs),
-              NewInSection(
-                productsCount: 604,
-                sectionName: "Woman's",
-                products: _bloc.womenNewInObs,
-                theme: NewInSectionTheme.LIGHT,
-                padding: const EdgeInsets.only(bottom: 30),
-              ),
-              NewInSection(
-                productsCount: 291,
-                sectionName: "Men's",
-                products: _bloc.menNewInObs,
-                theme: NewInSectionTheme.DARK,
-                padding: const EdgeInsets.symmetric(vertical: 30),
-              ),
-              const VerticalMargin(30),
-              _buildBestCategoriesTitle(),
-              const VerticalMargin(20),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: DefaultTabView(
-                  firstTabTitle: 'for women',
-                  secondTabTitle: 'for men',
-                  firstTab: CategoriesGrid(
-                    categories: _bloc.bestCategoriesForWomenObs,
-                  ),
-                  secondTab: CategoriesGrid(
-                    categories: _bloc.bestCategoriesForMenObs,
-                  ),
-                ),
-              ),
-              const VerticalMargin(62)
-            ],
+  Widget _buildContent() {
+    return SingleChildScrollView(
+      controller: _scrollController,
+      child: Column(
+        children: [
+          const VerticalMargin(20),
+          PromotionsCarousel(_bloc.promotionsObs),
+          NewInSection(
+            productsCount: 604,
+            sectionName: "Woman's",
+            products: _bloc.womenNewInObs,
+            theme: NewInSectionTheme.LIGHT,
+            padding: const EdgeInsets.only(bottom: 30),
           ),
-        ),
-      );
+          NewInSection(
+            productsCount: 291,
+            sectionName: "Men's",
+            products: _bloc.menNewInObs,
+            theme: NewInSectionTheme.DARK,
+            padding: const EdgeInsets.symmetric(vertical: 30),
+          ),
+          const VerticalMargin(30),
+          _buildBestCategoriesTitle(),
+          const VerticalMargin(20),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: DefaultTabView(
+              firstTabTitle: 'for women',
+              secondTabTitle: 'for men',
+              firstTab: CategoriesGrid(
+                categories: _bloc.bestCategoriesForWomenObs,
+              ),
+              secondTab: CategoriesGrid(
+                categories: _bloc.bestCategoriesForMenObs,
+              ),
+            ),
+          ),
+          const VerticalMargin(20),
+        ],
+      ),
+    );
   }
   
   Widget _buildBestCategoriesTitle() =>

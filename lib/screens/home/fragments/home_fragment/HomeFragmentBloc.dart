@@ -3,7 +3,6 @@ import 'package:otakoyi_test/data/models/domain/Category.dart';
 import 'package:otakoyi_test/data/models/domain/Product.dart';
 import 'package:otakoyi_test/data/models/domain/Promotion.dart';
 import 'package:otakoyi_test/data/models/domain/ValueOrError.dart';
-import 'package:otakoyi_test/data/repositories/FakeShopRepository.dart';
 import 'package:otakoyi_test/data/repositories/RepositoryProvider.dart';
 import 'package:otakoyi_test/data/repositories/ShopRepository.dart';
 

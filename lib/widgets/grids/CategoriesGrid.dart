@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:otakoyi_test/data/models/domain/Category.dart';
-import 'package:otakoyi_test/widgets/tiles/CategoryTile.dart';
+import 'package:otakoyi_test/widgets/tiles/CategoryGridTile.dart';
 
 class CategoriesGrid extends StatelessWidget {
   

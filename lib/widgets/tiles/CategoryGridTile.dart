@@ -53,7 +53,7 @@ class CategoryGridTile extends StatelessWidget {
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Text(
-          category.name,
+          category.name.toUpperCase(),
           textAlign: TextAlign.center,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
@@ -61,6 +61,7 @@ class CategoryGridTile extends StatelessWidget {
             fontSize: 12,
             fontWeight: FontWeight.w900,
             color: AppColors.BLACK,
+            letterSpacing: 1
           ),
         ),
       );

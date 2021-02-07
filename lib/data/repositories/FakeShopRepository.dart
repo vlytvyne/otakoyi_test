@@ -17,21 +17,28 @@ class FakeShopRepository extends GetConnect implements ShopRepository {
   
   @override
   Future<ValueOrError<List<Promotion>, Exception>> getPromotions() async {
-    const _MOCK_IMAGE_URL_1 = 'https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg';
-    const _MOCK_IMAGE_URL_2 = 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png';
-    const _MOCK_IMAGE_URL_3 = 'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg';
-    
-    const images = [
-      _MOCK_IMAGE_URL_1,
-      _MOCK_IMAGE_URL_2,
-      _MOCK_IMAGE_URL_3,
-    ];
+    const _PROM_IMAGE_URL_1 = 'https://html5css.ru/css/img_forest.jpg';
+    const _PROM_IMAGE_URL_2 = 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png';
+    const _PROM_IMAGE_URL_3 = 'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg';
   
-    final promotions = images.map((imageUrl) => Promotion(
+    final promotions = [
+      Promotion(
         'From 1 to 31 Dec, 2019',
         '50% OFF',
-        imageUrl
-    )).toList();
+        _PROM_IMAGE_URL_1
+      ),
+      Promotion(
+        'From 12 to 31 Mar, 2020',
+        '40% OFF',
+        _PROM_IMAGE_URL_2
+      ),
+      Promotion(
+        'From 25 to 31 Mar, 2021',
+        '70% OFF!',
+        _PROM_IMAGE_URL_3
+      ),
+    ];
+    
     return Future.delayed(
       Duration(seconds: 2),
       () => ValueOrError(value: promotions),
@@ -79,11 +86,11 @@ class FakeShopRepository extends GetConnect implements ShopRepository {
   Future<ValueOrError<List<Category>, Exception>> getBestCategoriesForWomen() {
     final categories = [
       Category('Dress', 58, AssetProvider.getImage('dress.png')),
-      Category('Jacket', 11, AssetProvider.getImage('jacket.png')),
-      Category('Jumsuit', 172, AssetProvider.getImage('jumpsuit.png')),
-      Category('Dress again??', 208, AssetProvider.getImage('dress.png')),
-      Category('Jacket again, rly?', 45, AssetProvider.getImage('jacket.png')),
-      Category('Jumpsuit, ok I see', 209, AssetProvider.getImage('jumpsuit.png')),
+      Category('Coats & Jacket', 11, AssetProvider.getImage('jacket.png')),
+      Category('Jumpsuits', 172, AssetProvider.getImage('jumpsuit.png')),
+      Category('Knitwear', 208, AssetProvider.getImage('knitwear.png')),
+      Category('Pyjamas', 45, AssetProvider.getImage('pyjamas.png')),
+      Category('Sets & Outfits', 209, AssetProvider.getImage('outfits.png')),
     ];
     
     return Future.delayed(
@@ -95,12 +102,12 @@ class FakeShopRepository extends GetConnect implements ShopRepository {
   @override
   Future<ValueOrError<List<Category>, Exception>> getBestCategoriesForMen() {
     final categories = [
-      Category('Jumpsuit', 12, AssetProvider.getImage('jumpsuit.png')),
-      Category('Dress something', 45, AssetProvider.getImage('dress.png')),
-      Category('Jacket', 23, AssetProvider.getImage('jacket.png')),
-      Category('Jumpsuit', 67, AssetProvider.getImage('jumpsuit.png')),
-      Category('Name', 56, AssetProvider.getImage('dress.png')),
-      Category('Jacketoo', 123, AssetProvider.getImage('jacket.png')),
+      Category('Coats & Jacket', 44, AssetProvider.getImage('jacket.png')),
+      Category('Dress', 102, AssetProvider.getImage('dress.png')),
+      Category('Knitwear', 24, AssetProvider.getImage('knitwear.png')),
+      Category('Sets & Outfits', 90, AssetProvider.getImage('outfits.png')),
+      Category('Pyjamas', 12, AssetProvider.getImage('pyjamas.png')),
+      Category('Jumpsuits', 64, AssetProvider.getImage('jumpsuit.png')),
     ];
     
     return Future.delayed(
