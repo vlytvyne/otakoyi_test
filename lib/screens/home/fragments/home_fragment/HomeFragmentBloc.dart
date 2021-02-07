@@ -4,6 +4,7 @@ import 'package:otakoyi_test/data/models/domain/Product.dart';
 import 'package:otakoyi_test/data/models/domain/Promotion.dart';
 import 'package:otakoyi_test/data/models/domain/ValueOrError.dart';
 import 'package:otakoyi_test/data/repositories/FakeShopRepository.dart';
+import 'package:otakoyi_test/data/repositories/RepositoryProvider.dart';
 import 'package:otakoyi_test/data/repositories/ShopRepository.dart';
 
 class HomeFragmentBloc {
@@ -17,7 +18,7 @@ class HomeFragmentBloc {
   final bestCategoriesForWomenObs = List<Category>().obs;
   final bestCategoriesForMenObs = List<Category>().obs;
   
-  final ShopRepository shopRepository = FakeShopRepository.instance;
+  final ShopRepository shopRepository = Get.find<RepositoryProvider>().shopRepository;
   
   HomeFragmentBloc() {
     _fetchData();
