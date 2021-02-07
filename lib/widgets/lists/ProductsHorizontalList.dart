@@ -26,6 +26,7 @@ class ProductsHorizontalList extends StatelessWidget {
           padding: padding,
           scrollDirection: Axis.horizontal,
           itemCount: products.length,
+          physics: BouncingScrollPhysics(),
           separatorBuilder: (_, __) => separator,
           itemBuilder: (_, int index) =>
             ProductTile(
