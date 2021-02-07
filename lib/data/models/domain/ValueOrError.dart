@@ -12,5 +12,10 @@ class ValueOrError<T, E extends Exception> {
 
 extension ValueOrErrorExtension on List<ValueOrError> {
   
-  get hasErrors => this.any((element) => element.hasError);
+  bool get hasErrors => this.any((element) => element.hasError);
+  
+  String get composedErrors => this.map((e) => e.error.toString())
+                                   .reduce((value, element) => value + " " + element);
+  
+  Exception get firstError => this.firstWhere((element) => element.hasError).error;
 }

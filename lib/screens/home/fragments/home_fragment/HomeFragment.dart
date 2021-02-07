@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:otakoyi_test/data/models/domain/Category.dart';
-import 'package:otakoyi_test/data/models/domain/Product.dart';
-import 'package:otakoyi_test/data/models/domain/Promotion.dart';
+import 'package:get/get.dart';
 import 'package:otakoyi_test/data/other/AssetProvider.dart';
-import 'package:otakoyi_test/data/repositories/FakeShopRepository.dart';
+import 'package:otakoyi_test/screens/home/fragments/home_fragment/HomeFragmentBloc.dart';
 import 'package:otakoyi_test/utils/AppColors.dart';
 import 'package:otakoyi_test/widgets/appBars/AppBarWithDynamicShadow.dart';
 import 'package:otakoyi_test/widgets/appBars/DefaultAppBar.dart';
@@ -24,14 +22,7 @@ class HomeFragment extends StatefulWidget {
 class _HomeFragmentState extends State<HomeFragment> {
   
   final _scrollController = ScrollController();
-  
-  @override
-  void initState() {
-    FakeShopRepository.instance.getMensNewIn().then(
-          (value) => print(value.value.length),
-    );
-    super.initState();
-  }
+  final _bloc = HomeFragmentBloc();
   
   @override
   Widget build(BuildContext context) =>
@@ -60,24 +51,53 @@ class _HomeFragmentState extends State<HomeFragment> {
       );
   
   Widget _buildBody() =>
-      SafeArea(
+      Obx(
+        () {
+          if (_bloc.loadingObs.value) {
+            return _buildLoading();
+          } else {
+            if (_bloc.errorObs.value != null) {
+              return _buildError();
+            } else {
+              return _buildContent();
+            }
+          }
+        }
+      );
+  
+  Widget _buildLoading() =>
+      Center(
+        child: CircularProgressIndicator(
+          valueColor: AlwaysStoppedAnimation<Color>(AppColors.BLACK),
+        )
+      );
+  
+  Widget _buildError() =>
+      Center(
+        child: Text(
+          _bloc.errorObs.value.toString(),
+        ),
+      );
+
+  SafeArea _buildContent() {
+    return SafeArea(
         child: SingleChildScrollView(
           controller: _scrollController,
           child: Column(
             children: [
               const VerticalMargin(20),
-              PromotionsCarousel(promotions),
+              PromotionsCarousel(_bloc.promotionsObs),
               NewInSection(
                 productsCount: 604,
                 sectionName: "Woman's",
-                products: [],
+                products: _bloc.womenNewInObs,
                 theme: NewInSectionTheme.LIGHT,
                 padding: const EdgeInsets.only(bottom: 30),
               ),
               NewInSection(
                 productsCount: 291,
                 sectionName: "Men's",
-                products: [],
+                products: _bloc.menNewInObs,
                 theme: NewInSectionTheme.DARK,
                 padding: const EdgeInsets.symmetric(vertical: 30),
               ),
@@ -90,10 +110,10 @@ class _HomeFragmentState extends State<HomeFragment> {
                   firstTabTitle: 'for women',
                   secondTabTitle: 'for men',
                   firstTab: CategoriesGrid(
-                    categories: categories1,
+                    categories: _bloc.bestCategoriesForWomenObs,
                   ),
                   secondTab: CategoriesGrid(
-                    categories: categories2,
+                    categories: _bloc.bestCategoriesForMenObs,
                   ),
                 ),
               ),
@@ -102,6 +122,7 @@ class _HomeFragmentState extends State<HomeFragment> {
           ),
         ),
       );
+  }
   
   Widget _buildBestCategoriesTitle() =>
       Padding(
@@ -126,6 +147,7 @@ class _HomeFragmentState extends State<HomeFragment> {
   @override
   void dispose() {
     _scrollController.dispose();
+    _bloc.dispose();
     super.dispose();
   }
   

@@ -7,6 +7,8 @@ import 'package:otakoyi_test/data/models/network/ProductNetworkModel.dart';
 import 'package:otakoyi_test/data/other/AssetProvider.dart';
 import 'package:otakoyi_test/data/repositories/ShopRepository.dart';
 
+const _API_ENDPOINT = 'https://fakestoreapi.com/products';
+
 class FakeShopRepository extends GetConnect implements ShopRepository {
   
   static final instance = FakeShopRepository._createInstance();
@@ -36,13 +38,13 @@ class FakeShopRepository extends GetConnect implements ShopRepository {
     );
   }
   
-  ///I would rather go with retrofit, but just keep things simple in test app use GetConnect
+  ///I could also go with retrofit, but just keep things simple in the test app I'm using GetConnect
   @override
   Future<ValueOrError<List<Product>, Exception>> getWomensNewIn() async {
-    final response = await get('https://fakestoreapi.com/products/category/women clothing?limit=10');
+    final response = await get('$_API_ENDPOINT/category/women clothing?limit=10');
     if (response.isOk) {
       return ValueOrError(
-        value: (response.body as List<Map<String, dynamic>>).map(
+        value: (response.body as List<dynamic>).map(
           (e) => ProductNetworkModel.fromJson(e)
         ).toList()
       );
@@ -57,7 +59,7 @@ class FakeShopRepository extends GetConnect implements ShopRepository {
 
   @override
   Future<ValueOrError<List<Product>, Exception>> getMensNewIn() async {
-    final response = await get('https://fakestoreapi.com/products/category/men clothing?limit=10');
+    final response = await get('$_API_ENDPOINT/category/men clothing?limit=10');
     if (response.isOk) {
       return ValueOrError(
         value: (response.body as List<dynamic>).map(
