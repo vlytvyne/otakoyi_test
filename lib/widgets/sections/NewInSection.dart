@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:otakoyi_test/data/models/domain/Product.dart';
 import 'package:otakoyi_test/utils/AppColors.dart';
-import 'package:otakoyi_test/widgets/buttons/TextSpanButton.dart';
+import 'package:otakoyi_test/widgets/buttons/ClickableText.dart';
+import 'package:otakoyi_test/widgets/lists/ProductsHorizontalList.dart';
 import 'package:otakoyi_test/widgets/other/ProgressDotsIndicators.dart';
 import 'package:otakoyi_test/widgets/other/margins.dart';
 import 'package:otakoyi_test/widgets/tiles/ProductTile.dart';
@@ -42,7 +43,7 @@ class NewInSection extends StatelessWidget {
               const VerticalMargin(8),
               _wrapInPadding(_buildSectionTitle()),
               const VerticalMargin(12),
-              _wrapInPadding(TextSpanButton('See more',)),
+              _wrapInPadding(ClickableText('See more',)),
               const VerticalMargin(22),
               _buildProductsList(),
               const VerticalMargin(30),
@@ -92,20 +93,10 @@ class NewInSection extends StatelessWidget {
         ),
       );
 
-  SizedBox _buildProductsList() =>
-      SizedBox(
-        height: 260,
-        child: ListView.separated(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          scrollDirection: Axis.horizontal,
-          itemCount: products.length,
-          separatorBuilder: (_, __) => const HorizontalMargin(8),
-          itemBuilder: (_, int index) =>
-            ProductTile(
-              products[index],
-              theme: theme == NewInSectionTheme.LIGHT ? ProductTileTheme.LIGHT : ProductTileTheme.DARk,
-            ),
-        ),
+  Widget _buildProductsList() =>
+      ProductsHorizontalList(
+        products: products,
+        tileTheme: theme == NewInSectionTheme.LIGHT ? ProductTileTheme.LIGHT : ProductTileTheme.DARk,
       );
 
   ///Don't really know why those dots are on the design
