@@ -82,6 +82,7 @@ class _HomeFragmentState extends State<HomeFragment> {
   Widget _buildContent() {
     return SingleChildScrollView(
       controller: _scrollController,
+      physics: BouncingScrollPhysics(),
       child: Column(
         children: [
           const VerticalMargin(20),
