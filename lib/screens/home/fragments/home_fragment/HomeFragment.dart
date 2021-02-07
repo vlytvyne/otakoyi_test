@@ -4,6 +4,7 @@ import 'package:otakoyi_test/data/models/domain/Product.dart';
 import 'package:otakoyi_test/data/models/domain/Promotion.dart';
 import 'package:otakoyi_test/data/other/AssetProvider.dart';
 import 'package:otakoyi_test/utils/AppColors.dart';
+import 'package:otakoyi_test/widgets/appBars/AppBarWithDynamicShadow.dart';
 import 'package:otakoyi_test/widgets/appBars/DefaultAppBar.dart';
 import 'package:otakoyi_test/widgets/buttons/AppBarButton.dart';
 import 'package:otakoyi_test/widgets/buttons/ClickableText.dart';
@@ -12,8 +13,6 @@ import 'package:otakoyi_test/widgets/other/DefaultTabView.dart';
 import 'package:otakoyi_test/widgets/other/PromotionsCarousel.dart';
 import 'package:otakoyi_test/widgets/other/margins.dart';
 import 'package:otakoyi_test/widgets/sections/NewInSection.dart';
-import 'package:otakoyi_test/widgets/tabBars/DefaultTabBar.dart';
-import 'package:otakoyi_test/widgets/tiles/CategoryTile.dart';
 
 class HomeFragment extends StatefulWidget {
   
@@ -23,6 +22,8 @@ class HomeFragment extends StatefulWidget {
 
 class _HomeFragmentState extends State<HomeFragment> {
   
+  final _scrollController = ScrollController();
+  
   @override
   Widget build(BuildContext context) =>
       Scaffold(
@@ -31,24 +32,28 @@ class _HomeFragmentState extends State<HomeFragment> {
         body: _buildBody(),
       );
 
-  DefaultAppBar _buildAppBar() =>
-      DefaultAppBar(
-        actionButtons: [
-          AppBarButton(
-            AssetProvider.getIcon('search_outlined.svg')
-          ),
-          AppBarButton(
-            AssetProvider.getIcon('like_outlined.svg')
-          ),
-          AppBarButton(
-            AssetProvider.getIcon('cart_outlined.svg')
-          ),
-        ],
+  Widget _buildAppBar() =>
+      AppBarWithDynamicShadow(
+        scrollController: _scrollController,
+        child: DefaultAppBar(
+          actionButtons: [
+            AppBarButton(
+              AssetProvider.getIcon('search_outlined.svg')
+            ),
+            AppBarButton(
+              AssetProvider.getIcon('like_outlined.svg')
+            ),
+            AppBarButton(
+              AssetProvider.getIcon('cart_outlined.svg')
+            ),
+          ],
+        ),
       );
   
   Widget _buildBody() =>
       SafeArea(
         child: SingleChildScrollView(
+          controller: _scrollController,
           child: Column(
             children: [
               const VerticalMargin(20),
@@ -108,6 +113,12 @@ class _HomeFragmentState extends State<HomeFragment> {
           ],
         ),
       );
+  
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
   
 }
 
